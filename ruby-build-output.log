@@ -1,16 +1,0 @@
-mkdir: /Users/willdrougas/.asdf/downloads/ruby/3.3.6: File exists
-==> Downloading ruby-3.3.6.tar.gz...
--> curl -q -fL -o ruby-3.3.6.tar.gz https://cache.ruby-lang.org/pub/ruby/3.3/ruby-3.3.6.tar.gz
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 21.1M  100 21.1M    0     0  35.4M      0 --:--:-- --:--:-- --:--:-- 35.4M
-==> Installing ruby-3.3.6...
-ruby-build: using libyaml from homebrew
-ruby-build: using gmp from homebrew
--> ./configure "--prefix=$HOME/.asdf/installs/ruby/3.3.6" --enable-shared --with-libyaml-dir=/opt/homebrew/opt/libyaml --with-gmp-dir=/opt/homebrew/opt/gmp --with-ext=openssl,psych,+
--> make -j 8
-
-BUILD FAILED (macOS 26.5.2 on arm64 using ruby-build 20260716)
-
-You can inspect the build directory at /var/folders/v6/fvl2r2ps6b10tpcgqvf1dx080000gn/T/ruby-build.20260727153157.81911.DfJx7x
-See the full build log at /var/folders/v6/fvl2r2ps6b10tpcgqvf1dx080000gn/T/ruby-build.20260727153157.81911.log
