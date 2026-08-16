@@ -1,5 +1,5 @@
 class ResumesController < ApplicationController
-  before_action :set_resume, only: [:show, :update, :destroy]
+  before_action :set_resume, only: [ :show, :update, :destroy ]
 
   def index
     resumes = Resume.all.order(created_at: :desc)

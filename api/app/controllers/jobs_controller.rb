@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :update, :destroy]
+  before_action :set_job, only: [ :show, :update, :destroy ]
 
   def index
     jobs = Job.all.order(created_at: :desc)
@@ -41,7 +41,8 @@ class JobsController < ApplicationController
     params.require(:job).permit(
       :company,
       :title,
-      :description
+      :description,
+      :user_id
     )
   end
 

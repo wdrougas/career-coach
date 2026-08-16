@@ -1,5 +1,5 @@
 class AnalysesController < ApplicationController
-  before_action :set_anaylsis, only: [:show, :update, :destroy]
+  before_action :set_analysis, only: [ :show, :update, :destroy ]
 
   def index
     analyses = Analysis.all.order(created_at: :desc)
@@ -40,6 +40,7 @@ class AnalysesController < ApplicationController
   def analysis_params
     params.require(:analysis).permit(
       :match_score,
+      :summary,
       :job_id,
       :resume_id
     )
