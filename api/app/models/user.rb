@@ -1,4 +1,6 @@
 class User < ApplicationRecord
-  has_many :resumes
-  has_many :jobs
+  has_many :jobs, dependent: :destroy
+  has_many :resumes, dependent: :destroy
+
+  validates :email, presence: true
 end
