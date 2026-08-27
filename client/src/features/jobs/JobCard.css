@@ -1,0 +1,18 @@
+.job-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.job-card h2 {
+  margin-top: 0;
+}
+
+.job-card .company {
+  font-weight: 600;
+}
+
+.job-card .description {
+  line-height: 1.5;
+}

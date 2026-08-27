@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { getJobs } from './jobsApi'
+import JobCard from './JobCard'
 
 function JobsPage() {
   const [jobs, setJobs] = useState([])
@@ -6,22 +8,18 @@ function JobsPage() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    fetch('http://localhost:3000/jobs')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch jobs')
-        }
-
-        return response.json()
-      })
-      .then((data) => {
+    async function loadJobs() {
+      try {
+        const data = await getJobs()
         setJobs(data)
-        setLoading(false)
-      })
-      .catch((error) => {
+      } catch (error) {
         setError(error.message)
+      } finally {
         setLoading(false)
-      })
+      }
+    }
+
+    loadJobs()
   }, [])
 
   if (loading) {
@@ -39,15 +37,11 @@ function JobsPage() {
       {jobs.length === 0 ? (
         <p>No jobs found.</p>
       ) : (
-        <ul>
+        <section>
           {jobs.map((job) => (
-            <li key={job.id}>
-              <h2>{job.title}</h2>
-              <p>{job.company}</p>
-              <p>{job.description}</p>
-            </li>
+            <JobCard key={job.id} job={job} />
           ))}
-        </ul>
+        </section>
       )}
     </main>
   )
