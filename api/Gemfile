@@ -54,3 +54,5 @@ group :development, :test do
 
   gem "shoulda-matchers"
 end
+
+gem "rack-cors", "~> 3.0"

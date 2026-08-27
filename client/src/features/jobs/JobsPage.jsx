@@ -1,0 +1,58 @@
+import { useEffect, useState } from 'react'
+import { getJobs } from './jobsApi'
+import JobCard from './JobCard'
+import JobForm from './JobForm'
+
+function JobsPage() {
+  const [jobs, setJobs] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    async function loadJobs() {
+      try {
+        const data = await getJobs()
+        setJobs(data)
+      } catch (error) {
+        setError(error.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadJobs()
+  }, [])
+
+  function handleJobCreated(newJob) {
+    setJobs((currentJobs) => [newJob, ...currentJobs])
+  }
+
+  if (loading) {
+    return <p>Loading jobs...</p>
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>
+  }
+
+  return (
+    <main>
+      <h1>Jobs</h1>
+
+      {/* Temporarily hardcoding ID here. Need to refactor once authentication is setup */}
+      <JobForm userId={1} onJobCreated={handleJobCreated} />
+
+      {jobs.length === 0 ? (
+        <p>No jobs found.</p>
+      ) : (
+        <section>
+          {jobs.map((job) => (
+            <JobCard key={job.id} job={job} />
+          ))}
+        </section>
+      )}
+    </main>
+  )
+}
+
+export default JobsPage
