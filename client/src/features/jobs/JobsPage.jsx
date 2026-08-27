@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getJobs } from './jobsApi'
 import JobCard from './JobCard'
+import JobForm from './JobForm'
 
 function JobsPage() {
   const [jobs, setJobs] = useState([])
@@ -22,6 +23,10 @@ function JobsPage() {
     loadJobs()
   }, [])
 
+  function handleJobCreated(newJob) {
+    setJobs((currentJobs) => [newJob, ...currentJobs])
+  }
+
   if (loading) {
     return <p>Loading jobs...</p>
   }
@@ -33,6 +38,9 @@ function JobsPage() {
   return (
     <main>
       <h1>Jobs</h1>
+
+      {/* Temporarily hardcoding ID here. Need to refactor once authentication is setup */}
+      <JobForm userId={1} onJobCreated={handleJobCreated} />
 
       {jobs.length === 0 ? (
         <p>No jobs found.</p>
