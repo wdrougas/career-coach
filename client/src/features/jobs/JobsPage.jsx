@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getJobs } from './jobsApi'
 import JobCard from './JobCard'
-import JobForm from './JobForm'
 
 function JobsPage() {
   const [jobs, setJobs] = useState([])
@@ -22,10 +21,6 @@ function JobsPage() {
 
     loadJobs()
   }, [])
-
-  function handleJobCreated(newJob) {
-    setJobs((currentJobs) => [newJob, ...currentJobs])
-  }
 
   if (loading) {
     return <p>Loading jobs...</p>
