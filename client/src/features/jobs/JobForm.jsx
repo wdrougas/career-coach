@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { createJob } from './jobsApi'
+import { createJob, updateJob } from './jobsApi'
 import './JobForm.css'
 
-function JobForm({ userId, onJobCreated }) {
-  const [formData, setFormData] = useState({
-    company: '',
-    title: '',
-    description: '',
-  })
+function JobForm({ userId, job, onJobSaved }) {
+const [formData, setFormData] = useState({
+  company: job?.company || '',
+  title: job?.title || '',
+  description: job?.description || '',
+})
 
   const [error, setError] = useState(null)
   const [errors, setErrors] = useState({})
@@ -55,18 +55,20 @@ function JobForm({ userId, onJobCreated }) {
     setErrors({})
 
     try {
-      const newJob = await createJob({
-        ...formData,
-        user_id: userId,
-      })
+      let savedJob
 
-      setFormData({
-        company: '',
-        title: '',
-        description: '',
-      })
+      console.log(userId)
 
-      onJobCreated(newJob)
+      if (job) {
+        savedJob = await updateJob(job.id, formData)
+      } else {
+        savedJob = await createJob({
+          ...formData,
+          user_id: userId,
+        })
+      }
+
+      onJobSaved(savedJob)
     } catch (error) {
       setError(error.message)
     } finally {
@@ -76,7 +78,7 @@ function JobForm({ userId, onJobCreated }) {
 
   return (
     <form className="job-form" onSubmit={handleSubmit}>
-      <h2>Add a Job</h2>
+      <h2>{job ? 'Edit Job' : 'Add a Job'}</h2>
 
       {error && <p className="form-error">{error}</p>}
 
@@ -120,7 +122,11 @@ function JobForm({ userId, onJobCreated }) {
       </div>
 
       <button type="submit" disabled={submitting}>
-        {submitting ? 'Creating...' : 'Create Job'}
+        {submitting
+          ? 'Saving...'
+          : job
+            ? 'Save Changes'
+            : 'Create Job'}
       </button>
     </form>
   )
