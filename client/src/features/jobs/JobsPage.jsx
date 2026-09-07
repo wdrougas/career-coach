@@ -39,9 +39,6 @@ function JobsPage() {
     <main>
       <h1>Jobs</h1>
 
-      {/* Temporarily hardcoding ID here. Need to refactor once authentication is setup */}
-      <JobForm userId={1} onJobCreated={handleJobCreated} />
-
       {jobs.length === 0 ? (
         <p>No jobs found.</p>
       ) : (

@@ -1,0 +1,72 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 40px 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  box-sizing: border-box;
+}
+
+.navbar-brand {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar a {
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: var(--accent);
+}
+
+.navbar details {
+  position: relative;
+}
+
+.navbar summary {
+  cursor: pointer;
+  color: var(--text-h);
+  list-style: none;
+}
+
+.navbar summary::-webkit-details-marker {
+  display: none;
+}
+
+.navbar summary::after {
+  content: ' ▾';
+}
+
+.navbar-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 160px;
+  padding: 8px 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  z-index: 10;
+}
+
+.navbar-dropdown a {
+  display: block;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+
+.navbar-dropdown a:hover {
+  background: var(--accent-bg);
+}
